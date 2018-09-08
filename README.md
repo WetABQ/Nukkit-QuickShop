@@ -35,7 +35,7 @@ title: '&l&eQuick&6Shop &r&c» &a'
 
 ### Open source:
 
-- [GitHub(WGuild)](https://github.com/WetABQ/WGuild)
+- [GitHub(QuickShop)](https://github.com/WetABQ/Nukkit-QuickShop)
 
 ### Author:
 
