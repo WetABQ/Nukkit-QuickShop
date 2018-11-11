@@ -47,7 +47,7 @@ class InteractionShopListener : Listener {
                         "&d+------------------+"
                 ,arrayOf(shopData.owner,Lang.getItemName(Item.get(shopData.itemId,shopData.itemMeta)),shopData.price,if(shopData.type == ShopType.BUY) "SELLING" else "BUYING")))
                 player.sendMessage(Lang.getMessage("Please enter the &l&ecount &r&ayou need to &d&l{}", arrayOf(if(shopData.type == ShopType.BUY) "BUY" else "SELL")))
-                interactShop[player.name] = Pair(System.currentTimeMillis() + 5000, shop)
+                interactShop[player.name] = Pair(System.currentTimeMillis() + 8000, shop)
             }
         }
     }
@@ -84,7 +84,7 @@ class InteractionShopListener : Listener {
             val key = "${block.x.toInt()}:${block.y.toInt()}:${block.z.toInt()}:${block.level.folderName}"
             val shopData = QuickShop.instance.shopConfig.shopData[key]
             if (shopData != null) {
-                if (shopData.owner == player.name) {
+                if (shopData.owner == player.name || player.isOp) {
                     player.sendMessage(Lang.getMessage("Successfully removed your shop"))
 
                     val e = PlayerRemoveShopEvent(player, shopData)
@@ -94,6 +94,7 @@ class InteractionShopListener : Listener {
                         return
                     }
 
+                    QuickShop.removeItemEntity((shopData.signX+shopData.signZ).toLong())
                     QuickShop.instance.shopConfig.removeShop(key)
                 } else {
                     event.setCancelled()
@@ -106,7 +107,7 @@ class InteractionShopListener : Listener {
                 val key = "${sign.x.toInt()}:${sign.y.toInt()}:${sign.z.toInt()}:${sign.level.folderName}"
                 val shopData = QuickShop.instance.shopConfig.shopData[key]
                 if (shopData != null) {
-                    if (shopData.owner == player.name) {
+                    if (shopData.owner == player.name || player.isOp) {
                         player.sendMessage(Lang.getMessage("Successfully removed your shop"))
 
                         val e = PlayerRemoveShopEvent(player, shopData)
@@ -116,6 +117,7 @@ class InteractionShopListener : Listener {
                             return
                         }
 
+                        QuickShop.removeItemEntity((shopData.signX+shopData.signZ).toLong())
                         QuickShop.instance.shopConfig.removeShop(key)
                     } else {
                         event.setCancelled()

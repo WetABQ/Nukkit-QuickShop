@@ -22,7 +22,7 @@ class SellShop(sign: String) : Shop(sign) {
             if (this.getShopChest() != null) {
                 val item = Item.get(shopData.itemId, shopData.itemMeta, count)
                 if (Shop.hasItem(player.inventory, item)) {
-                    if (Shop.getItemInInventory(player.inventory, item)!!.count >= count) {
+                    if (Shop.getItemInInventoryCount(player.inventory, item) >= count) {
                         if (!player.inventory.isFull && player.inventory.canAddItem(item)) {
 
                             val event = PlayerSellEvent(player, shopData,count)

@@ -16,13 +16,17 @@ import me.onebone.economyapi.EconomyAPI
 class BuyShop(sign: String) : Shop(sign) {
 
     fun buyItem(player: Player, count: Int) {
+        if (count <= 0) {
+            player.sendMessage(Lang.getMessage("&cPlease enter the correct number"))
+            return
+        }
         val money = EconomyAPI.getInstance().myMoney(player.name)
         val price = shopData.price * count
         if (money >= price) {
             if (this.getShopChest() != null) {
                 val item = Item.get(shopData.itemId, shopData.itemMeta, count)
                 if (shopData.unlimited || Shop.hasItem(this.getShopChest()!!.realInventory, item)) {
-                    if (shopData.unlimited || Shop.getItemInInventory(this.getShopChest()!!.realInventory, item)!!.count >= count) {
+                    if (shopData.unlimited || Shop.getItemInInventoryCount(this.getShopChest()!!.realInventory, item) >= count) {
                         if (!player.inventory.isFull && player.inventory.canAddItem(item)) {
 
                             val event = PlayerBuyEvent(player, shopData,count)

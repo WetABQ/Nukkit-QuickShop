@@ -63,6 +63,7 @@ abstract class Shop(sign: String) {
                     flag = true
                 }
             }
+            //baseInventory.clearAll()
             return flag
         }
 
@@ -74,6 +75,17 @@ abstract class Shop(sign: String) {
                 }
             }
             return null
+        }
+
+        @JvmStatic
+        fun getItemInInventoryCount(baseInventory: BaseInventory,item: Item): Int {
+            var count = 0
+            baseInventory.slots.values.forEach {i ->
+                if (i.id == item.id && i.damage == item.damage) {
+                    count += i.count
+                }
+            }
+            return count
         }
 
         @JvmStatic

@@ -18,7 +18,7 @@ class PlayerListener : Listener {
     @EventHandler
     fun onPlayerJoin(event: PlayerJoinEvent) {
         for (shopData in QuickShop.instance.shopConfig.shopData.values) {
-            QuickShop.addItemEntity(event.player, Position(shopData.chestX.toDouble(),shopData.chestY.toDouble(),shopData.chestZ.toDouble()), Item.get(shopData.itemId,shopData.itemMeta,1))
+            QuickShop.addItemEntity(event.player, Position(shopData.chestX.toDouble(),shopData.chestY.toDouble(),shopData.chestZ.toDouble()), Item.get(shopData.itemId,shopData.itemMeta,1),(shopData.signX+shopData.signZ).toLong())
         }
     }
 

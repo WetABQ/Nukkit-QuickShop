@@ -40,7 +40,8 @@ class LanguageConfig : QuickShopConfig("language") {
             "&cThat is not your own shop." to "",
             "Successfully changed the shop type" to "",
             "Successfully changed the shop price" to "",
-            "Successfully changed the shop unlimited[{}]" to ""
+            "Successfully changed the shop unlimited[{}]" to "",
+            "&cPlease enter the correct number" to ""
     )
 
     init {

@@ -7,6 +7,7 @@ import cn.nukkit.entity.data.EntityMetadata
 import cn.nukkit.item.Item
 import cn.nukkit.level.Position
 import cn.nukkit.network.protocol.AddItemEntityPacket
+import cn.nukkit.network.protocol.RemoveEntityPacket
 import cn.nukkit.plugin.PluginBase
 import cn.nukkit.utils.TextFormat
 import io.wetabq.quickshop.command.QuickShopCommand
@@ -77,17 +78,17 @@ class QuickShop : PluginBase(){
             return pattern.matcher(str).matches()
         }
 
-        fun addItemEntity(location: Position,item: Item) {
-            addItemEntity(Server.getInstance().onlinePlayers.values.toTypedArray(),location,item)
+        fun addItemEntity(location: Position,item: Item,eid : Long) {
+            addItemEntity(Server.getInstance().onlinePlayers.values.toTypedArray(),location,item,eid)
         }
 
-        fun addItemEntity(player: Player,location: Position,item: Item) {
-            addItemEntity(arrayOf(player),location,item)
+        fun addItemEntity(player: Player,location: Position,item: Item,eid : Long) {
+            addItemEntity(arrayOf(player),location,item,eid)
         }
 
-        fun addItemEntity(players: Array<Player>,location: Position,item: Item) {
+        fun addItemEntity(players: Array<Player>,location: Position,item: Item,eid : Long) {
             val addItemEntityPacket = AddItemEntityPacket()
-            addItemEntityPacket.entityUniqueId = System.currentTimeMillis()
+            addItemEntityPacket.entityUniqueId = eid
             addItemEntityPacket.entityRuntimeId = addItemEntityPacket.entityUniqueId
             addItemEntityPacket.item = item
             addItemEntityPacket.x = location.x.toInt().toFloat() + 0.5F
@@ -102,6 +103,20 @@ class QuickShop : PluginBase(){
                     .putLong(Entity.DATA_LEAD_HOLDER_EID, -1)
                     .putFloat(Entity.DATA_SCALE, 4f)
             Server.broadcastPacket(players, addItemEntityPacket)
+        }
+
+        fun removeItemEntity(eid : Long) {
+            removeItemEntity(Server.getInstance().onlinePlayers.values.toTypedArray(),eid)
+        }
+
+        fun removeItemEntity(player: Player,eid : Long) {
+            removeItemEntity(arrayOf(player),eid)
+        }
+
+        fun removeItemEntity(players: Array<Player>,eid : Long) {
+            val removeItemEntityPacket = RemoveEntityPacket()
+            removeItemEntityPacket.eid = eid
+            Server.broadcastPacket(players,removeItemEntityPacket)
         }
     }
 }
