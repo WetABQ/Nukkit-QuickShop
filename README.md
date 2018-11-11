@@ -28,6 +28,17 @@ title: '&l&eQuick&6Shop &r&c» &a'
 
 --------
 
+## API: 
+```java
+//Listening event(PlayerBuyEvent,PlayerSellEvent,PlayerCreateShopEvent,PlayerRemoveShopEvent)
+@EventHandler
+public void onPlayerBuyEvent(PlayerBuyEvent event) {
+  event.player.sendMessage(event.getShopDate()+"\n"+event.getCount());
+}
+```
+
+--------
+
 ### Images:
 ![SHOP.jpg](https://i.loli.net/2018/09/08/5b93e3efbc115.jpg)
 
