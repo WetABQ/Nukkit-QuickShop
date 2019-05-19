@@ -121,7 +121,7 @@ class QuickShopCommand : Command("qs") {
                 }
             }
             "unlimited","ul" -> {
-                if (sender is Player) {
+                if (sender is Player && sender.isOp) {
                     if (InteractionShopListener.interactShop.containsKey(sender.name)) {
                         val shop = InteractionShopListener.interactShop[sender.name]!!.second
                         if (shop.shopData.owner.equals(sender.name)) {
