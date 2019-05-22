@@ -10,6 +10,7 @@ import io.wetabq.quickshop.QuickShop
  */
 class MasterConfig : QuickShopConfig("config") {
     var title = "&l&eQuick&6Shop &r&c» &a"
+    var waitTime = 8000  // 8000 ms
 
     init {
         init()
@@ -19,6 +20,7 @@ class MasterConfig : QuickShopConfig("config") {
         if (!isEmpty()) {
             try {
                 title = configSection.getString("title")
+                waitTime = configSection.getInt("waitTime")
             } catch (e: Exception) {
                 QuickShop.instance.logger.warning(e.message)
                 QuickShop.instance.logger.error("Master Config(config.yml) while loading config")
@@ -32,6 +34,7 @@ class MasterConfig : QuickShopConfig("config") {
     override fun spawnDefaultConfig() {
         if (isEmpty()) {
             configSection["title"] = title
+            configSection["waitTime"] = waitTime
         }
         save()
         init()
@@ -42,6 +45,7 @@ class MasterConfig : QuickShopConfig("config") {
             try {
                 configSection.clear()
                 configSection["title"] = title
+                configSection["waitTime"] = waitTime
                 config.setAll(configSection)
                 config.save()
             } catch (e: Exception) {

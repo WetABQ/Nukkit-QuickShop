@@ -89,13 +89,15 @@ abstract class Shop(sign: String) {
         }
 
         @JvmStatic
-        fun createShop(owner: Player, chest: Position, sign: Position, price: Int, item: Item,type: Int) {
+        fun createShop(owner: Player, chest: Position, sign: Position, price: Int, item: Item,type: Int): Boolean {
             val shopData = ShopData(owner.name,type,price,chest.x.toInt(),chest.y.toInt(),chest.z.toInt(),sign.x.toInt(),sign.z.toInt(),chest.level.folderName,item.id,item.damage,false)
 
             val event = PlayerCreateShopEvent(owner, shopData)
             Server.getInstance().pluginManager.callEvent(event)
+            if (event.isCancelled) return false
 
             QuickShop.instance.shopConfig.addShop(shopData)
+            return true
         }
 
         @JvmStatic

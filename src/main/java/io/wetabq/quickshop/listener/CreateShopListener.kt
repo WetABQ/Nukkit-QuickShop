@@ -29,7 +29,7 @@ class CreateShopListener : Listener {
             val pair = Shop.findShop(event.block)
             val sign: BlockEntitySign? = pair?.first
             if (sign != null && pair.second == null && event.item.id != Item.SIGN && event.item.id != 0) {
-                createShopPlayer[event.player.name] = Pair(System.currentTimeMillis() + 8000,event.block)
+                createShopPlayer[event.player.name] = Pair(System.currentTimeMillis() + QuickShop.instance.masterConfig.waitTime,event.block)
                 event.player.sendMessage(Lang.getMessage("Please enter the &e&lprice &r&ato set up your shop!"))
                 event.setCancelled()
             }
@@ -49,13 +49,17 @@ class CreateShopListener : Listener {
                 val sign: BlockEntitySign? = Shop.findShop(chest)?.first
                 if (sign != null) {
                     val item = player.inventory.itemInHand
-                    sign.setText(Lang.getMessage("&c[&l&eQuick&6Shop&r&c]",false),
-                            Lang.getMessage("&aType: {}", arrayOf("BUY"),false),
-                            Lang.getMessage("&eItem: {}", arrayOf(Lang.getItemName(item)),false),
-                            Lang.getMessage("&c&lPrice: {}$ /count", arrayOf(event.message),false))
-                    QuickShop.addItemEntity(chest, Item.get(item.id,item.damage,1),(sign.x.toInt()+sign.z.toInt()).toLong())
-                    player.sendMessage(Lang.getMessage("Successfully created the shop"))
-                    Shop.createShop(player, chest, sign, event.message.toInt(), item, ShopType.BUY)
+                    val cancel = Shop.createShop(player, chest, sign, event.message.toInt(), item, ShopType.BUY)
+                    if (cancel) {
+                        sign.setText(Lang.getMessage("&c[&l&eQuick&6Shop&r&c]", false),
+                                Lang.getMessage("&aType: {}", arrayOf("BUY"), false),
+                                Lang.getMessage("&eItem: {}", arrayOf(Lang.getItemName(item)), false),
+                                Lang.getMessage("&c&lPrice: {}$ /count", arrayOf(event.message), false))
+                        QuickShop.addItemEntity(chest, Item.get(item.id, item.damage, 1), (sign.x.toInt() + sign.z.toInt()).toLong())
+                        player.sendMessage(Lang.getMessage("Successfully created the shop"))
+                    } else {
+                        player.sendMessage(Lang.getMessage("Error, create shop is canceled"))
+                    }
                 } else {
                     player.sendMessage(Lang.getMessage("&cPlease put a sign around your chest."))
                 }

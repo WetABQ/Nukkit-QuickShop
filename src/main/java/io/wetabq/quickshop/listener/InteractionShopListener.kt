@@ -47,7 +47,7 @@ class InteractionShopListener : Listener {
                         "&d+------------------+"
                 ,arrayOf(shopData.owner,Lang.getItemName(Item.get(shopData.itemId,shopData.itemMeta)),shopData.price,if(shopData.type == ShopType.BUY) "SELLING" else "BUYING")))
                 player.sendMessage(Lang.getMessage("Please enter the &l&ecount &r&ayou need to &d&l{}", arrayOf(if(shopData.type == ShopType.BUY) "BUY" else "SELL")))
-                interactShop[player.name] = Pair(System.currentTimeMillis() + 8000, shop)
+                interactShop[player.name] = Pair(System.currentTimeMillis() + QuickShop.instance.masterConfig.waitTime, shop)
             }
         }
     }

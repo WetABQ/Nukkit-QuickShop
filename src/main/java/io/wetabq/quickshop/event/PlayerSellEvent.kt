@@ -12,7 +12,7 @@ import io.wetabq.quickshop.data.ShopData
  * @author WetABQ Copyright (c) 2018.09
  * @version 1.0
  */
-class PlayerSellEvent(player : Player,val shopData: ShopData, val count: Int) : PlayerEvent(), Cancellable {
+class PlayerSellEvent(player : Player,shopData: ShopData, val count: Int) : QuickShopPlayerEvent(player,shopData), Cancellable {
 
     init {
         super.player = player

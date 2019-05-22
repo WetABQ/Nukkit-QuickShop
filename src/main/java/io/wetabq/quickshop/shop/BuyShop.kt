@@ -53,7 +53,7 @@ class BuyShop(sign: String) : Shop(sign) {
                 }
             }
         } else {
-            player.sendMessage(Lang.getMessage("&cYour money is not enough to buy,you still need \${} to buy", arrayOf(shopData.price - money)))
+            player.sendMessage(Lang.getMessage("&cYour money is not enough to buy,you still need \${} to buy", arrayOf(price - money)))
         }
     }
 

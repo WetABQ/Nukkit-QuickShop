@@ -71,7 +71,7 @@ class QuickShop : PluginBase(){
     companion object {
         lateinit var instance : QuickShop
         var TITLE = ""
-        const val VERSION = "v1.0.1"
+        const val VERSION = "v1.0.2.1"
 
         fun isInteger(str: String): Boolean {
             val pattern = Pattern.compile("^[-\\+]?[\\d]*$")

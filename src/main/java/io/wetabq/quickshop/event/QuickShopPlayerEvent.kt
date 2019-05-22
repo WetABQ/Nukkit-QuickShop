@@ -3,15 +3,16 @@ package io.wetabq.quickshop.event
 import cn.nukkit.Player
 import cn.nukkit.event.Cancellable
 import cn.nukkit.event.HandlerList
+import cn.nukkit.event.player.PlayerEvent
 import io.wetabq.quickshop.data.ShopData
 
 /**
  * QuickShop
  *
- * @author WetABQ Copyright (c) 2018.09
+ * @author WetABQ Copyright (c) 2019.05
  * @version 1.0
  */
-class PlayerCreateShopEvent(player : Player,shopData: ShopData) : QuickShopPlayerEvent(player,shopData),Cancellable {
+open class QuickShopPlayerEvent(player : Player, val shopData: ShopData) : PlayerEvent(), Cancellable {
 
     init {
         super.player = player

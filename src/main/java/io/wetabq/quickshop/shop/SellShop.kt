@@ -49,7 +49,7 @@ class SellShop(sign: String) : Shop(sign) {
                 }
             }
         } else {
-            player.sendMessage(Lang.getMessage("&cThe owner money is not enough to buy", arrayOf(shopData.price - money)))
+            player.sendMessage(Lang.getMessage("&cThe owner money is not enough to buy"))
         }
     }
 
