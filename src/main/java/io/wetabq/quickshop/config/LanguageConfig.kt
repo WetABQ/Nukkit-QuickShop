@@ -72,16 +72,7 @@ class LanguageConfig : QuickShopConfig("language") {
 
     override fun save() {
         if (!isEmpty()) {
-            try {
-                configSection.clear()
-                configSection["language"] = languageConfig
-                config.setAll(configSection)
-                config.save()
-            } catch (e: Exception) {
-                QuickShop.instance.logger.warning(e.message)
-                QuickShop.instance.logger.error("Language Config(language.yml) has an error while saving config")
-            }
-
+            //NOT NEED SAVE
         } else {
             spawnDefaultConfig()
         }

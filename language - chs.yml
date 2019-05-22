@@ -6,15 +6,15 @@ language:
     &d| &aOwner: &e{}
     &d| &aItem: &e{}
     &d| &aPrice: &e{}$ /count
-    &d| &aThis shop is &b{} items
+    &d| &aThis shop is &b{} &aitems
     &d+------------------+
-  : |- 
+  : |-  
     &d+-------信息-------+
     &d| &a所有者: &e{}
     &d| &a物品: &e{}
     &d| &a价格: &e{}$ /个
     &d| &a这个商店的类型是 &b{}
-    &d+------------------+'
+    &d+------------------+
   '&b/qs sell(s) - Set the current clicked shop as the sell type': '&b/qs sell(s) - 设置当前点击的商店为回收类型'
   '&aType: {}': '&a类型: {}'
   '&cYour inventory is full and cannot be purchased': '&c你的背包已满，无法购买'
